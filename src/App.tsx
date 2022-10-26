@@ -1,8 +1,29 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import logo from './logo.svg';
+import { getAllPokemons, getPokemon } from '../src/services/pokemon.services';
 import './App.css';
 
-function App() {
+interface Pokemon {
+  id: number;
+  name: string;
+}
+
+const App = () => {
+  const [pokemon, setPokemon] = useState<Pokemon>();
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+
+
+  const loadAllPokemons = async () => {
+    const pokemons = await getAllPokemons();
+    setPokemons(pokemons);
+  }
+
+  useEffect(() => {
+    loadAllPokemons();
+  }, []);
+
+  console.log(pokemons);
+
   return (
     <div className="App">
       <header className="App-header">
