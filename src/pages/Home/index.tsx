@@ -13,7 +13,7 @@ interface Pokemon {
 }
 const Home = () => {
   const [pokemon, setPokemon] = useState<Pokemon>();
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [pokemons, setPokemons] = useState<Pokemon[] | any>([] || null);
   const [newPokemon, setNewPokemon] = useState('');
   const [inputError, setInputError] = useState('');
 
@@ -32,7 +32,7 @@ const Home = () => {
     event.preventDefault();
 
     if (!newPokemon) {
-      setInputError('Digite o nome de um Pokemon!');
+      setInputError('No pokemon found!');
       return;
     }
     try {
@@ -43,7 +43,6 @@ const Home = () => {
     } catch (err) {
       setInputError('Couldn\'t find this Pokemon');
     }
-
   }
 
   return (
